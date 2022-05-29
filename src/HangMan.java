@@ -6,9 +6,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HangMan {
+
     public static void main(String[] args) throws Exception {
         ArrayList<Character> lettersGuessed = new ArrayList<Character>();
-        String hangmanStatus="";
+
         // creating new ArrayList<String> to contain all the words
         ArrayList<String> allWords = new ArrayList<String>();
         Scanner myReader = new Scanner(new File("HangMan/lib/Words.txt"));
@@ -54,87 +55,8 @@ public class HangMan {
             while (stillPlaying) {
                 // to keep track of guesses left
                 // guessesLeft -=i;
-                switch (guessesLeft) {
-                    //I decided i didnt need this because it doesn't register so i manually do it in the losing condition
-                    // //// sixth error, add the second leg, whole body game over:
-                    // // __________
-                    // // |  |
-                    // // |  |
-                    // // |  O
-                    // // | /|\
-                    // // | / \
-                    // // __________________
-                    // case 0:
-                    //     hangmanStatus= " __________\n |	 |\n |	 |\n |	 O\n |	/|\\\n |	/ \\\n __________________\n\n";
-                    //     break;
-                    //     //// fifth error, add the first leg
-                    //     // __________
-                    //     // |  |
-                    //     // |  |
-                    //     // |  O
-                    //     // | /|\
-                    //     // | /
-                    //     // __________________
-                    case 1:
-                        hangmanStatus= " __________\n |	 |\n |	 |\n |	 O\n |	/|\\\n |	/ \n __________________\n\n";
-                        break;
-                        // fourth error, add the second arm
-                        // __________
-                        // |  |
-                        // |  |
-                        // |  O
-                        // | /|\
-                        // |
-                        // __________________
-                    case 2:
-                        hangmanStatus= " __________\n |	 |\n |	 |\n |	 O\n |	/|\\\n |	\n __________________\n\n";
-                        break;
-                        // third error, add the first arm
-                        // __________
-                        // |  |
-                        // |  |
-                        // |  O
-                        // | /|
-                        // |
-                        // __________________
-                    case 3:
-                        hangmanStatus= " __________\n |	 |\n |	 |\n |	 O\n |	/|\n |	\n __________________\n\n";
-                        break;
-                        // second error, head and torso
-                        // __________
-                        // | |
-                        // | |
-                        // | O
-                        // | |
-                        // |
-                        // __________________
-                    case 4:
-                        hangmanStatus= " __________\n |	 |\n |	 |\n |	 O\n |       |\n |	\n __________________\n\n";
-                        break;
-                        // first error just the head
-                        // __________
-                        // | |
-                        // | |
-                        // | O
-                        // |
-                        // |
-                        // __________________
-                    case 5:
-                        hangmanStatus= " __________\n |	 |\n |	 |\n |	 O\n |	\n |	\n __________________\n \n";
-                        break;
-                        // starting point
-                        // __________
-                        // | |
-                        // | |
-                        // |
-                        // |
-                        // |
-                        // __________________
-                    case 6:
-                        hangmanStatus= " __________\n |	 |\n |	 |\n |	 \n |	\n |	\n __________________\n\n";
-                        break;
-                }
-                System.out.println(hangmanStatus);
+
+                System.out.println(hangmanDrawing(guessesLeft));
                 for (String i : underScores)
                     System.out.print(i);
                 System.out.println("\nYou have " + guessesLeft + " guesses left");
@@ -173,7 +95,7 @@ public class HangMan {
                 for (Character l : lettersGuessed)
                     System.out.print(l + " ");
                 System.out.println("\n");
-                
+
                 String wholeWord = "";
                 for (String eachLetter : underScores)
                     wholeWord += eachLetter;
@@ -188,8 +110,8 @@ public class HangMan {
                     playAgain = anotherGame.nextInt();
 
                 } else if (guessesLeft == 0) {
-                    hangmanStatus= " __________\n |	 |\n |	 |\n |	 O\n |	/|\\\n |	/ \\\n __________________\n\n";
-                    System.out.println(hangmanStatus);
+
+                    System.out.println(hangmanDrawing(guessesLeft));
                     System.out.println(
                             "\nYou lost because you have " + guessesLeft + " guesses left.\nThe word was: "
                                     + randomWord);
@@ -206,12 +128,98 @@ public class HangMan {
         guessInput.close();
         anotherGame.close();
     }
+
+    static String hangmanDrawing(int guessesLeft) {
+        String hangmanStatus = "";
+        switch (guessesLeft) {
+            // I decided i didnt need this because it doesn't register so i manually do it
+            // in the losing condition
+            // //// sixth error, add the second leg, whole body game over:
+            // // __________
+            // // | |
+            // // | |
+            // // | O
+            // // | /|\
+            // // | / \
+            // // __________________
+            case 0:
+                hangmanStatus = " __________\n |	 |\n |	 |\n |	 O\n |	/|\\\n |	/ \\\n __________________\n\n";
+                break;
+            // //// fifth error, add the first leg
+            // // __________
+            // // | |
+            // // | |
+            // // | O
+            // // | /|\
+            // // | /
+            // // __________________
+            case 1:
+                hangmanStatus = " __________\n |	 |\n |	 |\n |	 O\n |	/|\\\n |	/ \n __________________\n\n";
+                break;
+            // fourth error, add the second arm
+            // __________
+            // | |
+            // | |
+            // | O
+            // | /|\
+            // |
+            // __________________
+            case 2:
+                hangmanStatus = " __________\n |	 |\n |	 |\n |	 O\n |	/|\\\n |	\n __________________\n\n";
+                break;
+            // third error, add the first arm
+            // __________
+            // | |
+            // | |
+            // | O
+            // | /|
+            // |
+            // __________________
+            case 3:
+                hangmanStatus = " __________\n |	 |\n |	 |\n |	 O\n |	/|\n |	\n __________________\n\n";
+                break;
+            // second error, head and torso
+            // __________
+            // | |
+            // | |
+            // | O
+            // | |
+            // |
+            // __________________
+            case 4:
+                hangmanStatus = " __________\n |	 |\n |	 |\n |	 O\n |       |\n |	\n __________________\n\n";
+                break;
+            // first error just the head
+            // __________
+            // | |
+            // | |
+            // | O
+            // |
+            // |
+            // __________________
+            case 5:
+                hangmanStatus = " __________\n |	 |\n |	 |\n |	 O\n |	\n |	\n __________________\n \n";
+                break;
+            // starting point
+            // __________
+            // | |
+            // | |
+            // |
+            // |
+            // |
+            // __________________
+            case 6:
+                hangmanStatus = " __________\n |	 |\n |	 |\n |	 \n |	\n |	\n __________________\n\n";
+                break;
+        }
+        return hangmanStatus;
+    }
 }
 
 // __________
-// |  |
-// |  |
-// |  O
+// | |
+// | |
+// | O
 // | /|\
 // | / \
 // __________________
